@@ -1,3 +1,9 @@
+export default function App() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const ADMIN_PASS = "haygee123";
+}
+
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 
@@ -20,6 +26,11 @@ export default function App() {
   const [message, setMessage] = useState("");
   const [wishes, setWishes] = useState([]);
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  // 👇 Admin states
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const ADMIN_PASS = "haygee123";
 
   // Bank accounts array
   const bankAccounts = [
@@ -80,6 +91,32 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 flex items-center justify-center p-4">
       <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-3xl shadow-xl max-w-xl w-full p-6">
+
+        {/* 👇 Admin login form */}
+    {!isAdmin && (
+      <div className="bg-white bg-opacity-90 p-4 rounded-2xl mb-6 shadow-md text-center">
+        <input
+          type="password"
+          placeholder="Admin Password"
+          className="p-2 mb-2 border rounded w-full"
+          value={adminPassword}
+          onChange={(e) => setAdminPassword(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            if (adminPassword === ADMIN_PASS) {
+              setIsAdmin(true);
+              setAdminPassword("");
+            } else {
+              alert("Incorrect password");
+            }
+          }}
+          className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full"
+        >
+          Login
+        </button>
+      </div>
+    )}
         
         {/* Header */}
         <h1 className="text-4xl font-bold text-center text-white mb-2">
