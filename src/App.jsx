@@ -1,9 +1,3 @@
-export default function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [adminPassword, setAdminPassword] = useState("");
-  const ADMIN_PASS = "haygee123";
-}
-
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 
@@ -22,6 +16,9 @@ const launchConfetti = () => {
 const BIRTHDAY = new Date("2026-02-22T00:00:00");
 
 export default function App() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const ADMIN_PASS = "haygee123";
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [wishes, setWishes] = useState([]);
