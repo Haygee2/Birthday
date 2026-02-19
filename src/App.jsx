@@ -16,10 +16,6 @@ const launchConfetti = () => {
 const BIRTHDAY = new Date("2026-02-22T00:00:00");
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [adminPassword, setAdminPassword] = useState("");
-  const ADMIN_PASS = "haygee123";
-  
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [wishes, setWishes] = useState([]);
@@ -43,20 +39,6 @@ function App() {
       .order("created_at", { ascending: false });
 
     setWishes(data || []);
-  }
-  
-  // For the delete function
-  async function deleteWish(id) {
-    const { error } = await supabase
-      .from("wishes")
-      .delete()
-      .eq("id", id);
-
-    if (error) {
-      alert("Error deleting wish: " + error.message);
-    } else {
-      fetchWishes(); // refresh the list
-    }
   }
 
   // Countdown logic
@@ -98,32 +80,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 flex items-center justify-center p-4">
       <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-3xl shadow-xl max-w-xl w-full p-6">
-
-        {/* 👇 Admin login form */}
-        {!isAdmin && (
-          <div className="bg-white bg-opacity-90 p-4 rounded-2xl mb-6 shadow-md text-center">
-            <input
-              type="password"
-              placeholder="Admin Password"
-              className="p-2 mb-2 border rounded w-full"
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
-            />
-            <button
-              onClick={() => {
-                if (adminPassword === ADMIN_PASS) {
-                  setIsAdmin(true);
-                  setAdminPassword("");
-                } else {
-                  alert("Incorrect password");
-                }
-              }}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full"
-            >
-              Login
-            </button>
-          </div>
-        )}
         
         {/* Header */}
         <h1 className="text-4xl font-bold text-center text-white mb-2">
@@ -165,12 +121,14 @@ function App() {
             className="w-full p-2 mb-3 border rounded"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
           <textarea
             placeholder="Your Birthday Wish..."
             className="w-full p-2 mb-3 border rounded"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            required
           />
           <button
             type="submit"
@@ -184,19 +142,12 @@ function App() {
         <div>
           <h2 className="text-xl font-bold mb-3 text-white">💌 Birthday Wishes</h2>
           {wishes.map((wish) => (
-            <div key={wish.id} className="relative">
-              <div className="bg-white bg-opacity-80 p-3 rounded-2xl mb-3 shadow-md hover:scale-105 transition-transform">
-                <h3 className="font-bold text-purple-800">{wish.name}</h3>
-                <p className="text-gray-800">{wish.message}</p>
-                {isAdmin && (
-                  <button
-                    onClick={() => deleteWish(wish.id)}
-                    className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-full text-sm"
-                  >
-                    Delete
-                  </button>
-                )}
-              </div>
+            <div
+              key={wish.id}
+              className="bg-white bg-opacity-80 p-3 rounded-2xl mb-3 shadow-md hover:scale-105 transition-transform"
+            >
+              <h3 className="font-bold text-purple-800">{wish.name}</h3>
+              <p className="text-gray-800">{wish.message}</p>
             </div>
           ))}
         </div>
