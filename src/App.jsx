@@ -47,9 +47,9 @@ export default function App() {
         {/* Gift Section */}
         <div className="bg-white text-black p-4 rounded-xl mb-6 shadow-lg">
           <h2 className="font-bold text-lg mb-2">🎁 Send a Gift</h2>
-          <p>Bank: YOUR BANK</p>
-          <p>Account Name: YOUR NAME</p>
-          <p>Account Number: YOUR ACCOUNT NUMBER</p>
+          <p>Bank: OPAY</p>
+          <p>Account Name: ADEBOWALE GOODNESS IBUKUNOLUWA</p>
+          <p>Account Number: 7053170440</p>
         </div>
 
         {/* Form */}
