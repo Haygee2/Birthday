@@ -23,16 +23,8 @@ export default function App() {
 
   // Bank accounts array
   const bankAccounts = [
-    {
-      bank: "OPAY",
-      accountName: "ADEBOWALE GOODNESS IBUKUNOLUWA",
-      accountNumber: "7053170440",
-    },
-    {
-      bank: "PAYPAL",
-      accountName: "Goodness Ibukunoluwa",
-      accountNumber: "adebowalegoodness688@gmail.com",
-    },
+    { bank: "OPAY", accountName: "ADEBOWALE GOODNESS IBUKUNOLUWA", accountNumber: "7053170440" },
+    { bank: "PAYPAL", accountName: "Goodness Ibukunoluwa", accountNumber: "adebowalegoodness688@gmail.com" },
   ];
 
   // Fetch wishes
